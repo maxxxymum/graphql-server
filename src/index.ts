@@ -1,17 +1,28 @@
-const { GraphQLServer } = require('graphql-yoga');
+import { GraphQLServer } from 'graphql-yoga';
+import { Link } from './models';
+
+let links: Link[] = [{
+    id: 'link-0',
+    url: 'www.howtographql.com',
+    description: 'Fullstack tutorial for GraphQL'
+}];
 
 const typeDefs = `
 type Query {
     info: String!
+    feed: [Link!]!
+}
+
+type Link {
+    id: ID!
+    description: String!
+    url: String!
 }
 `;
 
-interface QueryResolvers {
-    info: () => string;
-}
-
-const Query: QueryResolvers = {
-    info: () => 'Hello GraphQL world!'
+const Query = {
+    info: () => 'Hello GraphQL world!',
+    feed: () => links
 }
 
 const resolvers = {
