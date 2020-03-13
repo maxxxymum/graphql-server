@@ -105,3 +105,6 @@ dist
 
 # Dist folder
 dist
+
+# Prisma setup
+prisma/prisma.yml
