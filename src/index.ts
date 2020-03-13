@@ -12,7 +12,7 @@ let idCount = links.length;
 const Query = {
     info: () => 'Hello GraphQL world!',
     feed: () => links,
-    link: (id: String) => links.find((link) => link.id === id)
+    link: (_: any, args: {id: string}) => links.find((link) => link.id === args.id)
 }
 
 const Mutation = {
