@@ -7,30 +7,69 @@ let links: Link[] = [{
     description: 'Fullstack tutorial for GraphQL'
 }];
 
-const typeDefs = `
-type Query {
-    info: String!
-    feed: [Link!]!
-}
-
-type Link {
-    id: ID!
-    description: String!
-    url: String!
-}
-`;
+let idCount = links.length;
 
 const Query = {
     info: () => 'Hello GraphQL world!',
-    feed: () => links
+    feed: () => links,
+    link: (id: String) => links.find((link) => link.id === id)
+}
+
+const Mutation = {
+    createLink: (_: any, args: {
+        url: string,
+        description: string
+    }) => {
+       const link: Link = {
+        id: `link-${idCount++}`,
+        description: args.description,
+        url: args.url,
+      };
+
+      links.push(link);
+
+      return link;
+    },
+
+    updateLink: (_: any, args: {
+        id: string,
+        description?: string,
+        url?: string,
+    }) => {
+        const link = links.find(link => link.id === args.id);
+
+        if (link) {
+            link.description = args.description ? args.description : link.description;
+            link.url = args.url ? args.url : link.url;
+
+            return link;
+        } else {
+            throw new Error('No mathcing link');
+        }
+    },
+
+    deleteLink: (_: any, args: {
+        id: string
+    }) => {
+        const linkToDelete = links.find(link => link.id === args.id);
+
+        if (linkToDelete) {
+            links.filter(link => link.id === linkToDelete.id);
+
+            return linkToDelete;
+        } else {
+            throw new Error('Nothing was deleted');
+        }
+    }
 }
 
 const resolvers = {
-    Query
+    Query,
+    Mutation
 }
 
 const server = new GraphQLServer({
-    typeDefs,
+    typeDefs: './src/schema.graphql',
     resolvers,
 });
 
