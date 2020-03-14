@@ -68,4 +68,25 @@ export function createLink(_: any, args: {
       description: args.description,
       postedBy: { connect: { id: userId } },
     })
-  }
+}
+
+export async function vote(_: any, args: {
+    linkId: string
+}, context: {
+    prisma: Prisma
+}) {
+    const userId = getUserId(context)
+    const voteExists = await context.prisma.$exists.vote({
+        user: { id: userId },
+        link: { id: args.linkId },
+    })
+
+    if (voteExists) {
+        throw new Error(`Already voted for link: ${args.linkId}`);
+    }
+  
+    return context.prisma.createVote({
+      user: { connect: { id: userId } },
+      link: { connect: { id: args.linkId } },
+    })
+}
