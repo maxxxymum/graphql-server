@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { Prisma } from './generated/prisma-client';
 
 export const APP_SECRET = 'GraphQL-is-aw3some';
 
@@ -13,4 +14,8 @@ export function getUserId(context: any) {
     }
 
     throw new Error('Not authenticated')
+}
+
+export interface GraphQLContext {
+    prisma: Prisma
 }

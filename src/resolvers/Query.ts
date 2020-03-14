@@ -1,5 +1,14 @@
-import { Prisma } from '../generated/prisma-client';
+import { GraphQLContext } from '../utils';
 
-export function feed(_: any, __: any, context: {prisma: Prisma}) {
-    return context.prisma.links();
-};
+export async function feed(_: any, args: {filter: string}, context: GraphQLContext,) {
+    const where = args.filter ? {
+      OR: [
+        { description_contains: args.filter },
+        { url_contains: args.filter },
+      ],
+    } : {}
+  
+    const links = await context.prisma.links({where});
+    
+    return links;
+}
