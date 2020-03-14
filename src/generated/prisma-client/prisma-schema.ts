@@ -21,7 +21,7 @@ type Link {
   createdAt: DateTime!
   description: String!
   url: String!
-  postedBy: User
+  postedBy: User!
 }
 
 type LinkConnection {
@@ -34,7 +34,7 @@ input LinkCreateInput {
   id: ID
   description: String!
   url: String!
-  postedBy: UserCreateOneWithoutLinksInput
+  postedBy: UserCreateOneWithoutLinksInput!
 }
 
 input LinkCreateManyWithoutPostedByInput {
@@ -148,7 +148,7 @@ input LinkSubscriptionWhereInput {
 input LinkUpdateInput {
   description: String
   url: String
-  postedBy: UserUpdateOneWithoutLinksInput
+  postedBy: UserUpdateOneRequiredWithoutLinksInput
 }
 
 input LinkUpdateManyDataInput {
@@ -392,12 +392,10 @@ input UserUpdateManyMutationInput {
   password: String
 }
 
-input UserUpdateOneWithoutLinksInput {
+input UserUpdateOneRequiredWithoutLinksInput {
   create: UserCreateWithoutLinksInput
   update: UserUpdateWithoutLinksDataInput
   upsert: UserUpsertWithoutLinksInput
-  delete: Boolean
-  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 

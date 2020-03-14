@@ -297,7 +297,7 @@ export interface LinkCreateInput {
   id?: Maybe<ID_Input>;
   description: String;
   url: String;
-  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
+  postedBy: UserCreateOneWithoutLinksInput;
 }
 
 export interface UserCreateOneWithoutLinksInput {
@@ -315,15 +315,13 @@ export interface UserCreateWithoutLinksInput {
 export interface LinkUpdateInput {
   description?: Maybe<String>;
   url?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
+  postedBy?: Maybe<UserUpdateOneRequiredWithoutLinksInput>;
 }
 
-export interface UserUpdateOneWithoutLinksInput {
+export interface UserUpdateOneRequiredWithoutLinksInput {
   create?: Maybe<UserCreateWithoutLinksInput>;
   update?: Maybe<UserUpdateWithoutLinksDataInput>;
   upsert?: Maybe<UserUpsertWithoutLinksInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 

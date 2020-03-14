@@ -13,7 +13,7 @@ type Link {
     id: ID!
     description: String!
     url: String!
-    postedBy: User
+    postedBy: User!
 }
 
 type AuthPayload {
@@ -26,4 +26,8 @@ type User {
   name: String!
   email: String!
   links: [Link!]!
+}
+
+type Subscription {
+  newLink: Link
 }

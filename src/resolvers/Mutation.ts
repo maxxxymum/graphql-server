@@ -59,6 +59,10 @@ export function createLink(_: any, args: {
 }): Promise<Link> {
     const userId = getUserId(context);
 
+    if (!userId) {
+        throw new Error('On logge in users allowed to create links');
+    }
+
     return context.prisma.createLink({
       url: args.url,
       description: args.description,
