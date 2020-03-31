@@ -9,19 +9,19 @@ type Feed {
 }
 
 type Mutation {
-    createLink(url: String!, description: String!): Link!
-    signup(email: String!, password: String!, name: String!): AuthPayload
-    login(email: String!, password: String!): AuthPayload
-    vote(linkId: ID!): Vote
+  createLink(url: String!, description: String!): Link!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  vote(linkId: ID!): Vote
 }
 
 type Link {
-    id: ID!
-    description: String!
-    url: String!
-    postedBy: User!
-    votes: [Vote!]!
-    createdAt: String!
+  id: ID!
+  description: String!
+  url: String!
+  postedBy: User!
+  votes: [Vote!]!
+  createdAt: String!
 }
 
 type AuthPayload {

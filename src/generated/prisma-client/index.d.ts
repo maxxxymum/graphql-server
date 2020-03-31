@@ -6,7 +6,7 @@ import { DocumentNode } from "graphql";
 import {
   makePrismaClientClass,
   BaseClientOptions,
-  Model
+  Model,
 } from "prisma-client-lib";
 import { typeDefs } from "./prisma-schema";
 
@@ -1328,16 +1328,16 @@ export type Long = string;
 export const models: Model[] = [
   {
     name: "Link",
-    embedded: false
+    embedded: false,
   },
   {
     name: "User",
-    embedded: false
+    embedded: false,
   },
   {
     name: "Vote",
-    embedded: false
-  }
+    embedded: false,
+  },
 ];
 
 /**
